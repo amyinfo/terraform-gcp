@@ -41,7 +41,9 @@ resource "google_compute_instance" "dual_nic_vm" {
   # 网卡1（VPC1 子网，无公网 IP）
   network_interface {
     subnetwork = var.subnet1
-    access_config {} # 分配临时公网 IP（可选，删除此行则完全无公网 IP）
+    access_config {
+      network_tier = "STANDARD" # 使用标准网络层
+    }
   }
 
   # 网卡2（VPC2 子网，无公网 IP）
