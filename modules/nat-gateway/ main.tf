@@ -42,7 +42,7 @@ resource "google_compute_instance" "dual_nic_vm" {
   network_interface {
     subnetwork = var.subnet1
     access_config {
-      network_tier = "STANDARD" # 使用标准网络层
+      network_tier = "PREMIUM"
     }
   }
 
