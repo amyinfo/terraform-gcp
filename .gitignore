@@ -6,3 +6,6 @@
 terraform.tfstate
 terraform.tfstate.backup
 *.tfvars
+
+# gcp workload identity pool
+credential-configuration.json

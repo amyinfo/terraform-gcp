@@ -34,3 +34,10 @@ module "nat-gateway" {
   subnet1 = module.network.subnet1
   subnet2 = module.network.subnet2
 }
+
+module "workload-identity-pool-k8s" {
+  source = "./modules/workload-identity-pool-k8s"
+  project_id = var.project_id
+  pool_id = var.pool_id
+  provider_id = var.provider_id
+}

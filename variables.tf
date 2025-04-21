@@ -26,3 +26,15 @@ variable "service_account_roles" {
   description = "Nested map defining IAM bindings for service accounts. Format: {target_sa = {role = [member_sa1, member_sa2]}}"
   type        = map(map(list(string)))
 }
+
+variable "pool_id" {
+  description = "Workload identity pool ID"
+  type        = string
+  default     = "docker-desktop"
+}
+
+variable "provider_id" {
+  description = "OIDC provider ID"
+  type        = string
+  default     = "docker-desktop"
+}
