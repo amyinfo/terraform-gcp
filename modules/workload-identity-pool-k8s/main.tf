@@ -1,13 +1,13 @@
 # Create Workload Identity Pool
-resource "google_iam_workload_identity_pool" "docker_desktop" {
+resource "google_iam_workload_identity_pool" "waukeen" {
   workload_identity_pool_id = var.pool_id
-  display_name              = "docker-desktop"
-  description               = "Access from docker-desktop on lolth"
+  display_name              = "waukeen"
+  description               = "Access from kubernetes on waukeen"
 }
 
 # Create OIDC Provider for kubernetes
-resource "google_iam_workload_identity_pool_provider" "docker_desktop" {
-  workload_identity_pool_id          = google_iam_workload_identity_pool.docker_desktop.workload_identity_pool_id
+resource "google_iam_workload_identity_pool_provider" "waukeen" {
+  workload_identity_pool_id          = google_iam_workload_identity_pool.waukeen.workload_identity_pool_id
   workload_identity_pool_provider_id = var.provider_id
   display_name                       = "Kubernetes OIDC Provider"
 
@@ -43,17 +43,17 @@ resource "google_project_iam_member" "compute_viewer" {
   member  = "serviceAccount:${google_service_account.compute_viewer.email}"
 }
 
-resource "google_project_iam_member" "compute_viewer_workload_identity" {
-  project = var.project_id
-  role    = "roles/compute.viewer"
-  member             = "principal://iam.googleapis.com/${google_iam_workload_identity_pool.docker_desktop.name}/subject/${var.k8s_subject}"
-}
+# resource "google_project_iam_member" "compute_viewer_workload_identity" {
+#   project = var.project_id
+#   role    = "roles/compute.viewer"
+#   member  = "principal://iam.googleapis.com/${google_iam_workload_identity_pool.waukeen.name}/subject/${var.k8s_subject}"
+# }
 
 # grant the workload identity user to the k8s service account
 resource "google_service_account_iam_member" "workload_identity_pool" {
   service_account_id = google_service_account.compute_viewer.name
   role               = "roles/iam.workloadIdentityUser"
-  member             = "principal://iam.googleapis.com/${google_iam_workload_identity_pool.docker_desktop.name}/subject/${var.k8s_subject}"
+  member             = "principal://iam.googleapis.com/${google_iam_workload_identity_pool.waukeen.name}/subject/${var.k8s_subject}"
 }
 
 # Create credential-configuration.json file
