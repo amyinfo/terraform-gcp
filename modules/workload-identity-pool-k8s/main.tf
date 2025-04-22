@@ -56,6 +56,12 @@ resource "google_service_account_iam_member" "workload_identity_pool" {
   member             = "principal://iam.googleapis.com/${google_iam_workload_identity_pool.waukeen.name}/subject/${var.k8s_subject}"
 }
 
+resource "google_service_account_iam_member" "workload_identity_user_for_namespace" {
+  service_account_id = google_service_account.compute_viewer.name
+  role               = "roles/iam.workloadIdentityUser"
+  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.waukeen.name}/attribute.namespace/${var.k8s_namespace}"
+}
+
 # Create credential-configuration.json file
 resource "local_file" "credential_config" {
   filename = "${path.root}/credential-configuration.json"

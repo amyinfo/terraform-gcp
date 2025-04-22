@@ -51,3 +51,8 @@ variable "k8s_subject" {
   type    = string
   default = "system:serviceaccount:default:gcp-workload-identity"
 }
+
+variable "k8s_namespace" {
+  type    = string
+  default = "default"
+}
