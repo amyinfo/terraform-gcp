@@ -41,3 +41,10 @@ module "workload-identity-pool-k8s" {
   pool_id = var.pool_id
   provider_id = var.provider_id
 }
+
+module "alerting" {
+  source = "./modules/alerting"
+
+  notification_channels = var.notification_channels
+  alert_policies        = var.alert_policies
+}
