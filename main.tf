@@ -36,9 +36,9 @@ module "nat-gateway" {
 }
 
 module "workload-identity-pool-k8s" {
-  source = "./modules/workload-identity-pool-k8s"
-  project_id = var.project_id
-  pool_id = var.pool_id
+  source      = "./modules/workload-identity-pool-k8s"
+  project_id  = var.project_id
+  pool_id     = var.pool_id
   provider_id = var.provider_id
 }
 
@@ -47,4 +47,12 @@ module "alerting" {
 
   notification_channels = var.notification_channels
   alert_policies        = var.alert_policies
+}
+
+module "logging-to-cloud-run" {
+  source = "./modules/logging-to-cloud-run"
+
+  project_id        = var.project_id
+  region            = var.region
+  slack_webhook_url = var.slack_webhook_url
 }

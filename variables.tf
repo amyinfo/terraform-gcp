@@ -48,6 +48,8 @@ variable "notification_channels" {
     sensitive_labels = optional(map(string))
     enabled          = optional(bool)
   }))
+
+  default = {}
 }
 
 variable "alert_policies" {
@@ -56,15 +58,35 @@ variable "alert_policies" {
     display_name = string
     combiner     = string
     condition = object({
-      display_name        = string
-      filter              = string
-      duration            = string
-      comparison          = string
-      threshold_value     = number
-      alignment_period    = string
-      per_series_aligner  = string
+      display_name       = string
+      filter             = string
+      duration           = string
+      comparison         = string
+      threshold_value    = number
+      alignment_period   = string
+      per_series_aligner = string
     })
-    channels_from_tf = optional(list(string)) # terraform managed channels
+    channels_from_tf  = optional(list(string)) # terraform managed channels
     channels_existing = optional(list(string)) # existing channel ID
   }))
+
+  default = {}
+}
+
+variable "region" {
+  description = "Default GCP region"
+  type        = string
+  default     = "us-central1"
+}
+
+variable "zone" {
+  description = "Default GCP zone"
+  type        = string
+  default     = "us-central1-c"
+}
+
+variable "slack_webhook_url" {
+  description = "Slack webhook URL for notifications"
+  type        = string
+  sensitive   = true
 }
