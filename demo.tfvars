@@ -53,3 +53,5 @@ alert_policies = {
     channels_existing = []
   }
 }
+
+slack_webhook_url = "https://hooks.slack.com/services/xxxxxxxxxx/xxxxxxxxxxxxxx/xxxxxxxxxxxxxxxxxxxxxxxx"

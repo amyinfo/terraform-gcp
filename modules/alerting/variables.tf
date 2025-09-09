@@ -15,15 +15,15 @@ variable "alert_policies" {
     display_name = string
     combiner     = string
     condition = object({
-      display_name        = string
-      filter              = string
-      duration            = string
-      comparison          = string
-      threshold_value     = number
-      alignment_period    = string
-      per_series_aligner  = string
+      display_name       = string
+      filter             = string
+      duration           = string
+      comparison         = string
+      threshold_value    = number
+      alignment_period   = string
+      per_series_aligner = string
     })
-    channels_from_tf = optional(list(string)) # terraform managed channels
+    channels_from_tf  = optional(list(string)) # terraform managed channels
     channels_existing = optional(list(string)) # existing channel ID
   }))
 }
